@@ -1,0 +1,44 @@
+{
+  "updated": "2026-10-02 02:47 PM ET",
+  "updated_iso": "2026-10-02T14:47:19-04:00",
+  "paper_only": true,
+  "note": "Paper trading only. No real money traded. Computed from the bots' own trade logs, losses included.",
+  "bots": [
+    {
+      "id": 1,
+      "key": "coinbase_dual",
+      "name": "Coinbase dual",
+      "source": "paper_trades_dual_v1.csv",
+      "pnl_basis": "Price move x quantity; the bot does not simulate fees.",
+      "closed_trades": 21,
+      "wins": 11,
+      "losses": 10,
+      "breakeven": 0,
+      "win_rate_pct": 52.4,
+      "total_pnl_usd": 8.46,
+      "total_fees_usd": "n/a",
+      "best_trade_usd": 4.64,
+      "worst_trade_usd": -2.46,
+      "last_trade_time": "2026-09-20 19:05",
+      "last_trade_time_note": "As logged by the bot (machine-local clock, no time zone recorded)."
+    },
+    {
+      "id": 2,
+      "key": "kraken",
+      "name": "Kraken",
+      "source": "paper_trades_kraken_v1.csv",
+      "pnl_basis": "Net of simulated 0.26%-per-side fees.",
+      "closed_trades": 18,
+      "wins": 9,
+      "losses": 9,
+      "breakeven": 0,
+      "win_rate_pct": 50.0,
+      "total_pnl_usd": -0.71,
+      "total_fees_usd": 2.52,
+      "best_trade_usd": 0.37,
+      "worst_trade_usd": -0.34,
+      "last_trade_time": "2026-09-20 15:16",
+      "last_trade_time_note": "As logged by the bot (machine-local clock, no time zone recorded)."
+    }
+  ]
+}

@@ -9,10 +9,11 @@
 <meta property="og:title" content="Paper Lab Tip Terminal"/>
 <meta property="og:description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab. Lightning for small tips, on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
 <meta name="twitter:card" content="summary"/>
+<meta property="og:url" content="https://butlerwake-alt.github.io/tip-jar/"/>
 <style>
   :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; }
   body { margin:0; min-height:100vh; background:#0b1020; color:#e8eefc;
-         display:flex; align-items:center; justify-content:center; padding:24px; }
+         display:flex; flex-direction:column; align-items:center; gap:20px; padding:24px; }
   .card { max-width:520px; width:100%; background:#121a33; border:1px solid #2a3a66;
            border-radius:20px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.45); }
   h1 { margin:0 0 6px; font-size:1.45rem; }
@@ -29,6 +30,24 @@
   button.btn.alt { background:#2a3a66; color:#e8eefc; }
   .suggested { color:#cbd8f7; margin:14px 0 0; font-size:.9rem; }
   .fine { margin-top:16px; color:#7f90b5; font-size:.78rem; line-height:1.35; }
+  ol.steps { padding-left:20px; line-height:1.5; margin:8px 0; }
+  ol.steps li { margin-bottom:6px; }
+  .q { background:#0b1020; border:1px solid #2a3a66; border-radius:14px; padding:14px; margin:12px 0; }
+  .q strong { display:block; font-size:1.02rem; margin-bottom:6px; }
+  .deadline { color:#f7931a; font-size:.9rem; }
+  .tally { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
+  .tbox { background:#0b1020; border-radius:12px; padding:12px; text-align:center; }
+  .tbox .n { font-size:1.6rem; font-weight:700; }
+  .tbox .l { color:#9db0d8; font-size:.85rem; }
+  .bar { height:8px; background:#2a3a66; border-radius:999px; overflow:hidden; margin-top:8px; }
+  .bar span { display:block; height:100%; width:0; background:#f7931a; }
+  .muted { color:#9db0d8; font-size:.85rem; line-height:1.4; }
+  table.sb { width:100%; border-collapse:collapse; font-size:.88rem; margin-top:8px; }
+  table.sb th, table.sb td { padding:7px 6px; border-bottom:1px solid #2a3a66; text-align:right; }
+  table.sb th:first-child, table.sb td:first-child { text-align:left; color:#9db0d8; font-weight:400; }
+  table.sb thead th { color:#cbd8f7; }
+  .neg { color:#ff7b7b; } .pos { color:#6fe3a1; }
+  ul.votes { padding-left:18px; font-size:.8rem; word-break:break-all; }
 </style>
 </head>
 <body>
@@ -37,6 +56,7 @@
     <p class="sub">Fuel Brian’s open paper-trading bake-off (Coinbase dual vs Kraken). Optional tips only — nothing for sale, no guarantees.</p>
     <p>Two paper-trading bots (Coinbase vs Kraken), run in the open with every result logged, losses included. Tips cover API and hosting costs and keep the weekly log going. Nothing for sale, not an investment, no guarantees.</p>
     <p class="suggested">Suggested: 1,000 · 5,000 · 21,000 sats</p>
+    <p class="suggested">New: an on-chain tip can also cast a vote that steers the paper bots. <a href="#steer" style="color:#f7931a">How it works ↓</a></p>
 
     <h2>Lightning (best for small tips)</h2>
     <img class="qr" src="lightning_qr.png" alt="Lightning tip QR code for butlerwake@strike.me"/>
@@ -55,6 +75,62 @@
     </div>
     <p class="fine">Lightning for small tips, on-chain for larger. Optional tips only: nothing for sale, no guarantees, no support contract.</p>
   </div>
+
+  <div class="card" id="steer">
+    <h1>Tips steer the bots</h1>
+    <p class="sub">Each week, on-chain tippers vote on one change to the paper bots. Every vote is public on the Bitcoin blockchain, so anyone can check the count.</p>
+    <ol class="steps">
+      <li><strong>Pick a bot</strong> for this week’s question below.</li>
+      <li><strong>Send an on-chain tip whose amount in sats ends in that bot’s number:</strong> 1 = Coinbase dual, 2 = Kraken.</li>
+      <li><strong>The winning change goes into the paper bot</strong> for next week, and the results get logged here, wins and losses.</li>
+    </ol>
+
+    <h2>This week’s question</h2>
+    <div class="q">
+      <strong id="wk-question">Which bot gets a tighter stop-loss for week 2?</strong>
+      <div>1 = Coinbase dual · 2 = Kraken</div>
+      <div class="deadline">Week <span id="wk-num">1</span>: voting closes <span id="wk-deadline">Fri Oct 9, 2026, 9:00 PM ET</span></div>
+      <div class="muted" id="wk-change">Paper-only change: no real money is traded.</div>
+    </div>
+
+    <h2>How to vote</h2>
+    <p>Example: <strong>tip 10,001 sats to vote Coinbase, 10,002 sats to vote Kraken.</strong> Only the last digit counts, so 5,001 or 21,002 work too. Most wallet apps let you switch the amount to sats and type an exact number.</p>
+    <div class="actions">
+      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?amount=0.00010001&label=Brian%20Paper%20Lab&message=Vote%201%20Coinbase%20dual">Vote Coinbase: 10,001 sats</a>
+      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?amount=0.00010002&label=Brian%20Paper%20Lab&message=Vote%202%20Kraken">Vote Kraken: 10,002 sats</a>
+    </div>
+    <p class="muted">These buttons open your Bitcoin wallet with the amount filled in (0.00010001 or 0.00010002 BTC) to the same on-chain address as above. Before you send, check that the amount still ends in 1 or 2. Some exchanges take their withdrawal fee out of the amount, which changes the last digit. One confirmed tip = one vote, whatever its size. A tip ending in any other digit is still a welcome tip, just without a vote. Lightning tips can’t vote, because Strike payments aren’t public, but they’re just as appreciated. If no votes come in or it’s a tie, neither bot changes.</p>
+
+    <h2>Live tally</h2>
+    <div class="tally">
+      <div class="tbox"><div class="n" id="v-cb">–</div><div class="l">1 · Coinbase dual</div><div class="bar"><span id="b-cb"></span></div></div>
+      <div class="tbox"><div class="n" id="v-kr">–</div><div class="l">2 · Kraken</div><div class="bar"><span id="b-kr"></span></div></div>
+    </div>
+    <p class="muted" id="v-meta">Loading votes…</p>
+    <ul class="votes" id="v-list"></ul>
+    <p class="muted">Check it yourself: <a style="color:#f7931a" href="https://mempool.space/address/bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv">every tip to this address on mempool.space</a>.</p>
+  </div>
+
+  <div class="card" id="scoreboard">
+    <h1>Scoreboard</h1>
+    <p class="sub">Side by side, generated from the bots’ own trade logs. Losses included.</p>
+    <table class="sb" id="sb-table">
+      <thead><tr><th></th><th>Coinbase dual</th><th>Kraken</th></tr></thead>
+      <tbody id="sb-body"><tr><td colspan="3">Loading scoreboard…</td></tr></tbody>
+    </table>
+    <p class="muted" id="sb-meta"></p>
+  </div>
+
+  <div class="card" id="crowd">
+    <h1>Crowd vs bots</h1>
+    <p class="sub">Did the crowd’s pick make or lose paper money compared with leaving the bot alone? This record starts after week 1.</p>
+    <p class="muted">No results yet. Week 1 voting closes Fri Oct 9, 2026, 9:00 PM ET.</p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Fine print</h2>
+    <p class="fine" style="margin-top:0">Paper trading only: the bots trade simulated money, and no real money is traded. Nothing here is investment advice, and no returns are promised or implied. Past paper results say nothing about the future. Tips are optional gifts. They buy nothing, carry no refund, and don’t give anyone a stake in anything. Votes pick one paper-settings change per week, and that’s all they do. Bitcoin payments are public and permanent, so anyone can see this address’s history.</p>
+  </div>
 <script>
   document.querySelectorAll('.copy-btn').forEach(function (button) {
     button.addEventListener('click', function () {
@@ -69,6 +145,52 @@
       }
     });
   });
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function getJSON(u) { return fetch(u + '?t=' + Date.now(), {cache:'no-store'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
+  getJSON('week.json').then(function (w) {
+    document.getElementById('wk-question').textContent = w.question;
+    document.getElementById('wk-num').textContent = w.week;
+    document.getElementById('wk-deadline').textContent = w.deadline_label;
+    if (w.change) document.getElementById('wk-change').textContent = w.change;
+  }).catch(function () {});
+  getJSON('votes.json').then(function (v) {
+    var cb = v.tally.coinbase_dual.votes, kr = v.tally.kraken.votes, tot = cb + kr;
+    document.getElementById('v-cb').textContent = cb;
+    document.getElementById('v-kr').textContent = kr;
+    document.getElementById('b-cb').style.width = tot ? (100 * cb / tot) + '%' : '0';
+    document.getElementById('b-kr').style.width = tot ? (100 * kr / tot) + '%' : '0';
+    var meta = tot ? (tot + ' vote' + (tot === 1 ? '' : 's') + ' so far') : 'No votes yet. Yours could be the first.';
+    if (v.tally.none.votes) meta += ' · ' + v.tally.none.votes + ' tip(s) without a vote';
+    if (v.pending_unconfirmed && v.pending_unconfirmed.length) meta += ' · ' + v.pending_unconfirmed.length + ' unconfirmed (counted once confirmed)';
+    meta += ' · Updated ' + v.updated;
+    document.getElementById('v-meta').textContent = meta;
+    var ul = document.getElementById('v-list');
+    (v.votes || []).forEach(function (e) {
+      var li = document.createElement('li');
+      li.innerHTML = esc(e.time) + ': ' + Number(e.sats).toLocaleString() + ' sats → ' +
+        (e.vote === 'coinbase_dual' ? 'Coinbase dual' : e.vote === 'kraken' ? 'Kraken' : 'no vote') +
+        ' (<a style="color:#f7931a" href="https://mempool.space/tx/' + esc(e.txid) + '">' + esc(e.txid.slice(0, 10)) + '…</a>)';
+      ul.appendChild(li);
+    });
+  }).catch(function () { document.getElementById('v-meta').textContent = 'Vote count unavailable right now. Check mempool.space directly.'; });
+  getJSON('scoreboard.json').then(function (d) {
+    var b = {}; d.bots.forEach(function (x) { b[x.key] = x; });
+    var c = b.coinbase_dual || {}, k = b.kraken || {};
+    function f(v, kind) {
+      if (v === undefined || v === null || v === 'n/a') return 'n/a';
+      if (kind === 'usd') { var cls = v < 0 ? 'neg' : v > 0 ? 'pos' : ''; return '<span class="' + cls + '">' + (v < 0 ? '-$' : '$') + Math.abs(v).toFixed(2) + '</span>'; }
+      if (kind === 'pct') return v + '%';
+      return esc(v);
+    }
+    var rows = [['Closed trades','closed_trades'],['Wins','wins'],['Losses','losses'],['Win rate','win_rate_pct','pct'],
+                ['Total paper P&amp;L','total_pnl_usd','usd'],['Best trade','best_trade_usd','usd'],['Worst trade','worst_trade_usd','usd'],
+                ['Simulated fees','total_fees_usd','usd'],['Last trade','last_trade_time']];
+    document.getElementById('sb-body').innerHTML = rows.map(function (r) {
+      return '<tr><td>' + r[0] + '</td><td>' + f(c[r[1]], r[2]) + '</td><td>' + f(k[r[1]], r[2]) + '</td></tr>';
+    }).join('');
+    document.getElementById('sb-meta').textContent = 'Updated ' + d.updated + '. Coinbase dual P&L: ' + (c.pnl_basis || 'n/a') + ' Kraken P&L: ' + (k.pnl_basis || 'n/a') +
+      ' Both bots are paused right now, so the numbers reflect their last logged trades. Paper money only.';
+  }).catch(function () { document.getElementById('sb-body').innerHTML = '<tr><td colspan="3">Scoreboard unavailable right now.</td></tr>'; });
 </script>
 </body>
 </html>

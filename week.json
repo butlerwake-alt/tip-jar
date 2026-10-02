@@ -1,0 +1,15 @@
+{
+  "week": 1,
+  "starts": "2026-10-02T00:00:00-04:00",
+  "ends": "2026-10-09T21:00:00-04:00",
+  "starts_label": "Fri Oct 2, 2026",
+  "deadline_label": "Fri Oct 9, 2026, 9:00 PM ET",
+  "question": "Which bot gets a tighter stop-loss for week 2?",
+  "options": [
+    {"digit": 1, "key": "coinbase_dual", "label": "Coinbase dual", "example_sats": 10001},
+    {"digit": 2, "key": "kraken", "label": "Kraken", "example_sats": 10002}
+  ],
+  "change": "The winning bot's stop-loss is tightened in its paper settings for week 2. Paper-only change: no real money is traded.",
+  "tie_rule": "If no votes come in or it's a tie, neither bot changes.",
+  "paper_only": true
+}
