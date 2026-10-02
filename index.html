@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Paper Lab Tip Terminal</title>
-<meta name="description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab. Nothing for sale, no guarantees. On-chain BTC only."/>
+<meta name="description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab, with Lightning for small tips and on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Paper Lab Tip Terminal"/>
-<meta property="og:description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab. Nothing for sale, no guarantees. On-chain BTC only."/>
+<meta property="og:description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab. Lightning for small tips, on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
 <meta name="twitter:card" content="summary"/>
 <style>
   :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; }
@@ -16,6 +16,7 @@
   .card { max-width:520px; width:100%; background:#121a33; border:1px solid #2a3a66;
            border-radius:20px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.45); }
   h1 { margin:0 0 6px; font-size:1.45rem; }
+  h2 { margin:24px 0 8px; font-size:1.05rem; color:#cbd8f7; }
   .sub { color:#9db0d8; margin-bottom:18px; line-height:1.4; }
   .qr { display:block; margin:18px auto; width:220px; height:220px; background:#fff;
         border-radius:12px; padding:10px; box-sizing:border-box; image-rendering:pixelated; }
@@ -26,6 +27,7 @@
            text-decoration:none; padding:12px 16px; border-radius:999px; border:0;
            font-size:1rem; font-family:inherit; cursor:pointer; }
   button.btn.alt { background:#2a3a66; color:#e8eefc; }
+  .suggested { color:#cbd8f7; margin:14px 0 0; font-size:.9rem; }
   .fine { margin-top:16px; color:#7f90b5; font-size:.78rem; line-height:1.35; }
 </style>
 </head>
@@ -33,25 +35,39 @@
   <div class="card">
     <h1>Paper Lab Tip Terminal</h1>
     <p class="sub">Fuel Brian’s open paper-trading bake-off (Coinbase dual vs Kraken). Optional tips only — nothing for sale, no guarantees.</p>
-    <img class="qr" src="btc_tip_qr.png" alt="Bitcoin tip QR code for bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
-    <code id="addr">bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
+    <p>Two paper-trading bots (Coinbase vs Kraken), run in the open with every result logged, losses included. Tips cover API and hosting costs and keep the weekly log going. Nothing for sale, not an investment, no guarantees.</p>
+    <p class="suggested">Suggested: 1,000 · 5,000 · 21,000 sats</p>
+
+    <h2>Lightning (best for small tips)</h2>
+    <img class="qr" src="lightning_qr.png" alt="Lightning tip QR code for butlerwake@strike.me"/>
+    <code id="lightning-addr">butlerwake@strike.me</code>
     <div class="actions">
-      <button class="btn alt" id="copy" type="button">Copy address</button>
+      <button class="btn alt copy-btn" type="button" data-target="lightning-addr">Copy address</button>
+      <a class="btn" href="https://strike.me/butlerwake">Tip with Strike / any Lightning wallet</a>
+    </div>
+
+    <h2>On-chain BTC (larger tips)</h2>
+    <img class="qr" src="btc_tip_qr.png" alt="Bitcoin tip QR code for bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
+    <code id="btc-addr">bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
+    <div class="actions">
+      <button class="btn alt copy-btn" type="button" data-target="btc-addr">Copy address</button>
       <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?label=Brian%20Paper%20Lab&message=Optional%20tip%20for%20the%20paper%20trading%20lab">Open in Bitcoin wallet</a>
     </div>
-    <p class="fine">Scan the QR (BIP21) — wallet apps prefill the address. On-chain BTC only (native SegWit, bc1q…). Optional tips only: nothing for sale, no guarantees, no support contract.</p>
+    <p class="fine">Lightning for small tips, on-chain for larger. Optional tips only: nothing for sale, no guarantees, no support contract.</p>
   </div>
 <script>
-  document.getElementById('copy').addEventListener('click', function () {
-    var b = this, a = document.getElementById('addr').textContent.trim();
-    function done(ok) { b.textContent = ok ? 'Copied!' : 'Copy failed — select the address'; setTimeout(function(){ b.textContent = 'Copy address'; }, 2000); }
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(a).then(function(){ done(true); }, function(){ done(false); });
-    } else {
-      var r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      try { done(document.execCommand('copy')); } catch (e) { done(false); }
-    }
+  document.querySelectorAll('.copy-btn').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var b = this, a = document.getElementById(b.dataset.target).textContent.trim();
+      function done(ok) { b.textContent = ok ? 'Copied!' : 'Copy failed — select the address'; setTimeout(function(){ b.textContent = 'Copy address'; }, 2000); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(a).then(function(){ done(true); }, function(){ done(false); });
+      } else {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById(b.dataset.target));
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        try { done(document.execCommand('copy')); } catch (e) { done(false); }
+      }
+    });
   });
 </script>
 </body>
