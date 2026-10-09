@@ -3,8 +3,8 @@
   "address": "bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv",
   "window_start": "2026-10-02T00:00:00-04:00",
   "window_end": "2026-10-09T21:00:00-04:00",
-  "updated": "2026-10-07 09:32 AM ET",
-  "updated_iso": "2026-10-07T09:32:09-04:00",
+  "updated": "2026-10-09 09:46 AM ET",
+  "updated_iso": "2026-10-09T09:46:27-04:00",
   "source": "https://mempool.space/address/bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv",
   "rule": "Last digit of the tip in sats: 1 = Coinbase dual, 2 = Kraken, other = tip, no vote. One vote per confirmed tip inside the window.",
   "tally": {
