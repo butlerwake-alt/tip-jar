@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Paper Lab Tip Terminal</title>
+<title>Tip Thursday — Paper Lab Tip Jar</title>
 <meta name="description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab, with Lightning for small tips and on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Paper Lab Tip Terminal"/>
+<meta property="og:title" content="Tip Thursday — Paper Lab Tip Jar"/>
 <meta property="og:description" content="Optional Bitcoin tip jar for Brian's open paper-trading lab. Lightning for small tips, on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
 <meta name="twitter:card" content="summary"/>
 <meta property="og:url" content="https://butlerwake-alt.github.io/tip-jar/"/>
@@ -48,15 +48,36 @@
   table.sb thead th { color:#cbd8f7; }
   .neg { color:#ff7b7b; } .pos { color:#6fe3a1; }
   ul.votes { padding-left:18px; font-size:.8rem; word-break:break-all; }
+
+  .buys { margin:14px 0 0; padding:14px; background:#0b1020; border:1px solid #2a3a66; border-radius:14px; }
+  .buys h3 { margin:0 0 8px; font-size:.95rem; color:#cbd8f7; font-weight:600; }
+  .buys ul { margin:0; padding-left:18px; color:#9db0d8; font-size:.88rem; line-height:1.5; }
+  .goal { margin:14px 0 0; }
+  .goal-meta { display:flex; justify-content:space-between; font-size:.85rem; color:#9db0d8; margin-bottom:6px; }
+  .goal .bar { height:10px; }
+  .goal .bar span { width:0%; }
 </style>
 </head>
 <body>
   <div class="card">
-    <h1>Paper Lab Tip Terminal</h1>
-    <p class="sub">Fuel Brian’s open paper-trading bake-off (Coinbase dual vs Kraken). Optional tips only — nothing for sale, no guarantees.</p>
-    <p>Two paper-trading bots (Coinbase vs Kraken), run in the open with every result logged, losses included. Tips cover API and hosting costs and keep the weekly log going. Nothing for sale, not an investment, no guarantees.</p>
+    <h1>Tip Thursday — What Your Tip Buys</h1>
+    <p class="sub">Honest Thursday check-in: optional tips help keep Brian’s open paper-trading bake-off online. Nothing for sale, no guarantees — and zero tips so far stays zero.</p>
+    <p>Two paper bots (Coinbase dual vs Kraken) run in the open with every result logged, losses included. Tips are optional gifts that help cover real costs of keeping the lab public.</p>
+    <div class="buys">
+      <h3>What your tip helps buy</h3>
+      <ul>
+        <li>Exchange API access for the paper bots</li>
+        <li>Hosting so the weekly log and this page stay up</li>
+        <li>Keeping the bake-off open — wins and losses posted the same way</li>
+      </ul>
+    </div>
+    <div class="goal" aria-label="Honest tip goal meter at zero">
+      <div class="goal-meta"><span>Toward one week of lab costs</span><span>0 / 21,000 sats</span></div>
+      <div class="bar"><span style="width:0%"></span></div>
+      <p class="muted" style="margin:6px 0 0">Honest meter: no tips received yet. Starts at zero.</p>
+    </div>
     <p class="suggested">Suggested: 1,000 · 5,000 · 21,000 sats</p>
-    <p class="suggested">New: an on-chain tip can also cast a vote that steers the paper bots. <a href="#steer" style="color:#f7931a">How it works ↓</a></p>
+    <p class="suggested">An on-chain tip can also cast a vote that steers the paper bots. <a href="#steer" style="color:#f7931a">How it works ↓</a></p>
 
     <h2>Lightning (best for small tips)</h2>
     <img class="qr" src="lightning_qr.png" alt="Lightning tip QR code for butlerwake@strike.me"/>
