@@ -4,287 +4,79 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Motivation Monday — Paper Lab Tip Jar</title>
-<meta name="description" content="Motivation Monday tip jar for Brian's open paper-trading lab, with Lightning for small tips and on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
-<meta property="og:type" content="website"/>
+<meta name="description" content="Brian's tip jar for his open paper-trading lab. Optional BTC tips, nothing for sale, no guarantees."/>
 <meta property="og:title" content="Motivation Monday — Paper Lab Tip Jar"/>
-<meta property="og:description" content="Motivation Monday tip jar for Brian's open paper-trading lab. Lightning for small tips, on-chain BTC for larger tips. Nothing for sale, no guarantees."/>
-<meta name="twitter:card" content="summary"/>
+<meta property="og:description" content="Optional BTC tips for Brian's open paper-trading lab. Nothing for sale, no guarantees."/>
 <meta property="og:url" content="https://butlerwake-alt.github.io/tip-jar/"/>
+<meta name="twitter:card" content="summary"/>
 <style>
-  :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; }
-  body { margin:0; min-height:100vh; background:#0b1020; color:#e8eefc;
-         display:flex; flex-direction:column; align-items:center; gap:20px; padding:24px; }
-  .card { max-width:520px; width:100%; background:#121a33; border:1px solid #2a3a66;
-           border-radius:20px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.45); }
-  h1 { margin:0 0 6px; font-size:1.45rem; }
-  h2 { margin:24px 0 8px; font-size:1.05rem; color:#cbd8f7; }
-  .sub { color:#9db0d8; margin-bottom:18px; line-height:1.4; }
-  .qr { display:block; margin:18px auto; width:220px; height:220px; background:#fff;
-        border-radius:12px; padding:10px; box-sizing:border-box; image-rendering:pixelated; }
-  code { display:block; word-break:break-all; background:#0b1020; padding:12px;
-          border-radius:10px; font-size:.8rem; margin:10px 0 12px; }
-  .actions { display:flex; flex-wrap:wrap; gap:10px; }
-  a.btn, button.btn { display:inline-block; background:#f7931a; color:#111; font-weight:700;
-           text-decoration:none; padding:12px 16px; border-radius:999px; border:0;
-           font-size:1rem; font-family:inherit; cursor:pointer; }
-  button.btn.alt { background:#2a3a66; color:#e8eefc; }
-  .suggested { color:#cbd8f7; margin:14px 0 0; font-size:.9rem; }
-  .fine { margin-top:16px; color:#7f90b5; font-size:.78rem; line-height:1.35; }
-  ol.steps { padding-left:20px; line-height:1.5; margin:8px 0; }
-  ol.steps li { margin-bottom:6px; }
-  .q { background:#0b1020; border:1px solid #2a3a66; border-radius:14px; padding:14px; margin:12px 0; }
-  .q strong { display:block; font-size:1.02rem; margin-bottom:6px; }
-  .deadline { color:#f7931a; font-size:.9rem; }
-  .tally { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
-  .tbox { background:#0b1020; border-radius:12px; padding:12px; text-align:center; }
-  .tbox .n { font-size:1.6rem; font-weight:700; }
-  .tbox .l { color:#9db0d8; font-size:.85rem; }
-  .bar { height:8px; background:#2a3a66; border-radius:999px; overflow:hidden; margin-top:8px; }
-  .bar span { display:block; height:100%; width:0; background:#f7931a; }
-  .muted { color:#9db0d8; font-size:.85rem; line-height:1.4; }
-  table.sb { width:100%; border-collapse:collapse; font-size:.88rem; margin-top:8px; }
-  table.sb th, table.sb td { padding:7px 6px; border-bottom:1px solid #2a3a66; text-align:right; }
-  table.sb th:first-child, table.sb td:first-child { text-align:left; color:#9db0d8; font-weight:400; }
-  table.sb thead th { color:#cbd8f7; }
-  .neg { color:#ff7b7b; } .pos { color:#6fe3a1; }
-  ul.votes { padding-left:18px; font-size:.8rem; word-break:break-all; }
-
-  .buys { margin:14px 0 0; padding:14px; background:#0b1020; border:1px solid #2a3a66; border-radius:14px; }
-  .buys h3 { margin:0 0 8px; font-size:.95rem; color:#cbd8f7; font-weight:600; }
-  .buys ul { margin:0; padding-left:18px; color:#9db0d8; font-size:.88rem; line-height:1.5; }
-  .goal { margin:14px 0 0; }
-  .goal-meta { display:flex; justify-content:space-between; font-size:.85rem; color:#9db0d8; margin-bottom:6px; }
-  .goal .bar { height:10px; }
-  .goal .bar span { width:0%; }
-  .trash { border-color:#3d8b5a; } .trash h1 { color:#9be7b4; }
-  .burn { border:3px dashed #ff3b3b; background:#2a0d10; } .burn h1 { color:#ff6b6b; }
-  .warn { background:#ff3b3b; color:#fff; font-weight:700; padding:14px; border-radius:12px; line-height:1.4; }
-  .burn .qr { border:6px solid #ff3b3b; } .burn code { border:1px solid #ff3b3b; }
-  .tag { display:inline-block; font-weight:700; font-size:.8rem; padding:4px 10px; border-radius:999px; }
-  details { margin:8px 0; } summary { cursor:pointer; font-weight:600; }
+  :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+  body { margin:0; background:#0b1020; color:#e8eefc; padding:16px; display:flex; flex-direction:column; align-items:center; gap:14px; }
+  .card { max-width:440px; width:100%; box-sizing:border-box; background:#121a33; border:1px solid #2a3a66; border-radius:16px; padding:20px; }
+  h1 { margin:0 0 4px; font-size:1.3rem; } h2 { margin:0 0 8px; font-size:1.05rem; }
+  .sub { color:#9db0d8; margin:0; line-height:1.4; }
+  .qr { display:block; margin:14px auto; width:200px; height:200px; background:#fff; border-radius:10px; padding:8px; box-sizing:border-box; image-rendering:pixelated; }
+  code { display:block; word-break:break-all; background:#0b1020; padding:10px; border-radius:8px; font-size:.8rem; margin:8px 0; }
+  .btn { display:inline-block; background:#f7931a; color:#111; font-weight:700; text-decoration:none; padding:10px 14px; border-radius:999px; border:0; font:inherit; font-weight:700; cursor:pointer; }
+  .alt { background:#2a3a66; color:#e8eefc; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; }
+  .m { color:#9db0d8; font-size:.85rem; line-height:1.4; margin:8px 0 0; }
+  a { color:#f7931a; }
+  .burn { border:3px dashed #ff3b3b; background:#2a0d10; } .burn h2 { color:#ff6b6b; }
+  .burn .qr { width:140px; height:140px; border:5px solid #ff3b3b; }
+  .warn { background:#ff3b3b; color:#fff; font-weight:700; padding:10px; border-radius:10px; font-size:.9rem; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Motivation Monday — Fuel for the Open Bake-Off</h1>
-    <p class="sub">Fresh week, same honest jar. Tips are optional fuel for the public paper-trading bake-off — nothing for sale, no guarantees.</p>
-    <p>Two paper bots (Coinbase dual vs Kraken) run in the open with every result logged, losses included. No real money is traded by the bots.</p>
-    <div class="buys">
-      <h3>What your tip helps keep running</h3>
-      <ul>
-        <li><b>API access</b> so both bots can keep pulling market data in the open.</li>
-        <li><b>Hosting</b> for this page, the scoreboard, and the public loss log.</li>
-        <li><b>The bake-off itself</b> — two strategies scored side by side, wins and losses, no paywall.</li>
-      </ul>
-    </div>
-    <div class="goal">
-      <div class="goal-meta"><span>Honest tip meter</span><span>0 / 21,000 sats</span></div>
-      <div class="bar"><span style="width:0%"></span></div>
-      <p class="muted" style="margin:6px 0 0">Still at zero — and that’s fine. No fake counts, no countdown.</p>
-    </div>
-    <p class="suggested">Suggested: 1,000 · 5,000 · 21,000 sats</p>
-    <p class="suggested">An on-chain tip can also cast a vote that steers the paper bots. <a href="#steer" style="color:#f7931a">How it works ↓</a></p>
+  <div class="card" id="tip">
+    <!-- DAILY THEME: routine updates the h1 + .sub below (and <title>) -->
+    <h1 id="theme-title">Motivation Monday — Fuel for the Open Bake-Off</h1>
+    <p class="sub" id="theme-line">Fresh week, same honest jar: optional tips keep two public paper-trading bots running.</p>
 
-    <h2>Lightning (best for small tips)</h2>
-    <img class="qr" src="lightning_qr.png" alt="Lightning tip QR code for butlerwake@strike.me"/>
-    <code id="lightning-addr">butlerwake@strike.me</code>
-    <div class="actions">
-      <button class="btn alt copy-btn" type="button" data-target="lightning-addr">Copy address</button>
-      <a class="btn" href="https://strike.me/butlerwake">Tip with Strike / any Lightning wallet</a>
-    </div>
-
-    <h2 id="tip-qr">On-chain BTC (larger tips)</h2>
-    <img class="qr" src="btc_tip_qr.png" alt="Bitcoin tip QR code for bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
+    <img class="qr" src="btc_tip_qr.png" alt="Tip QR for Brian: bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
+    <p style="text-align:center;margin:0"><b>🗑️ Toss your sats in — Brian needs them.</b></p>
+    <p class="m" style="text-align:center;margin-top:4px">This is a tip, and it goes straight to Brian’s own wallet.</p>
     <code id="btc-addr">bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
-    <div class="actions">
-      <button class="btn alt copy-btn" type="button" data-target="btc-addr">Copy address</button>
-      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?label=Brian%20Paper%20Lab&message=Optional%20tip%20for%20the%20paper%20trading%20lab">Open in Bitcoin wallet</a>
+    <div class="row">
+      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?label=Brian%20Paper%20Lab&message=Optional%20tip%20for%20the%20paper%20trading%20lab">Open wallet</a>
+      <button class="btn alt copy" data-target="btc-addr" data-label="Copy address">Copy address</button>
+      <button class="btn alt" id="share">Share page</button>
     </div>
-    <p class="fine">Lightning for small tips, on-chain for larger. Optional tips only: nothing for sale, no guarantees, no support contract.</p>
-  </div>
-
-  <div class="card" id="steer">
-    <h1>Tips steer the bots</h1>
-    <p class="sub">Each week, on-chain tippers vote on one change to the paper bots. Every vote is public on the Bitcoin blockchain, so anyone can check the count.</p>
-    <ol class="steps">
-      <li><strong>Pick a bot</strong> for this week’s question below.</li>
-      <li><strong>Send an on-chain tip whose amount in sats ends in that bot’s number:</strong> 1 = Coinbase dual, 2 = Kraken.</li>
-      <li><strong>The winning change goes into the paper bot</strong> for next week, and the results get logged here, wins and losses.</li>
-    </ol>
-
-    <div class="q" style="opacity:.8"><strong>Week 1 — closed</strong><div class="muted">“Which bot gets a tighter stop-loss?” closed Fri Oct 9, 2026, 9:00 PM ET with 0 votes. Per the tie rule, neither bot changed.</div></div>
-    <h2>This week’s question</h2>
-    <div class="q">
-      <strong id="wk-question">Which bot should sit out weekends (no new paper trades Sat–Sun) for week 3?</strong>
-      <div>1 = Coinbase dual · 2 = Kraken</div>
-      <div class="deadline">Week <span id="wk-num">2</span>: voting closes <span id="wk-deadline">Mon Oct 26, 2026, 9:00 PM ET</span></div>
-      <div class="muted" id="wk-change">Paper-only change: no real money is traded.</div>
-    </div>
-
-    <h2>How to vote</h2>
-    <p>Example: <strong>tip 10,001 sats to vote Coinbase, 10,002 sats to vote Kraken.</strong> Only the last digit counts, so 5,001 or 21,002 work too. Most wallet apps let you switch the amount to sats and type an exact number.</p>
-    <div class="actions">
-      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?amount=0.00010001&label=Brian%20Paper%20Lab&message=Vote%201%20Coinbase%20dual">Vote Coinbase: 10,001 sats</a>
-      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?amount=0.00010002&label=Brian%20Paper%20Lab&message=Vote%202%20Kraken">Vote Kraken: 10,002 sats</a>
-    </div>
-    <p class="muted">These buttons open your Bitcoin wallet with the amount filled in (0.00010001 or 0.00010002 BTC) to the same on-chain address as above. Before you send, check that the amount still ends in 1 or 2. Some exchanges take their withdrawal fee out of the amount, which changes the last digit. One confirmed tip = one vote, whatever its size. A tip ending in any other digit is still a welcome tip, just without a vote. Lightning tips can’t vote, because Strike payments aren’t public, but they’re just as appreciated. If no votes come in or it’s a tie, neither bot changes.</p>
-
-    <h2>Live tally</h2>
-    <div class="tally">
-      <div class="tbox"><div class="n" id="v-cb">–</div><div class="l">1 · Coinbase dual</div><div class="bar"><span id="b-cb"></span></div></div>
-      <div class="tbox"><div class="n" id="v-kr">–</div><div class="l">2 · Kraken</div><div class="bar"><span id="b-kr"></span></div></div>
-    </div>
-    <p class="muted" id="v-meta">Loading votes…</p>
-    <ul class="votes" id="v-list"></ul>
-    <p class="muted">Check it yourself: <a style="color:#f7931a" href="https://mempool.space/address/bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv">every tip to this address on mempool.space</a>.</p>
-  </div>
-
-  <div class="card" id="scoreboard">
-    <h1>Scoreboard</h1>
-    <p class="sub">Side by side, generated from the bots’ own trade logs. Losses included.</p>
-    <table class="sb" id="sb-table">
-      <thead><tr><th></th><th>Coinbase dual</th><th>Kraken</th></tr></thead>
-      <tbody id="sb-body"><tr><td colspan="3">Loading scoreboard…</td></tr></tbody>
-    </table>
-    <p class="muted" id="sb-meta"></p>
-  </div>
-
-  <div class="card" id="crowd">
-    <h1>Crowd vs bots</h1>
-    <p class="sub">Did the crowd’s pick make or lose paper money compared with leaving the bot alone? This record starts after week 1.</p>
-    <p class="muted">No results yet. Week 1 got 0 votes, so nothing changed. Week 2 voting closes Mon Oct 26, 2026, 9:00 PM ET.</p>
-  </div>
-
-  <div class="card trash" id="trash-can">
-    <h1>🗑️ Toss your sats in the trash can</h1>
-    <p class="sub"><b>Toss your sats in — Brian needs them.</b> Plainly put, <b>this is a tip</b>. Every sat goes to Brian’s own wallet, the same on-chain address as the tip jar above. Nothing is destroyed. Trash-can tippers get a public thank-you on the <a style="color:#f7931a" href="#thanks">Thank-you wall</a> too.</p>
-    <code>bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
-    <div class="actions"><a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?label=Brian%20Paper%20Lab&message=Trash%20can%20tip">Toss a tip in the can</a> <a class="btn alt" href="#tip-qr" style="background:#2a3a66;color:#e8eefc">Use the tip QR ↑</a></div>
-    <p class="fine">It’s a tip to Brian, not a burn. Want to actually destroy sats? That’s the separate Burn wall below.</p>
+    <p class="m">⚡ Small tip? Lightning: <b>butlerwake@strike.me</b> (<a href="https://strike.me/butlerwake">Strike</a>)</p>
+    <p class="m">Goal: 0 / 21,000 sats for a year of hosting and market data. Updated by hand from <a href="https://mempool.space/address/bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv">public on-chain data</a>.</p>
+    <p class="m">Week 2 vote: an on-chain tip ending in 1 (Coinbase dual) or 2 (Kraken) picks which paper bot sits out weekends. Closes Mon Oct 26, 9:00 PM ET. Week 1 closed with 0 votes, so nothing changed.</p>
   </div>
 
   <div class="card" id="thanks">
-    <h1>Thank-you wall</h1>
-    <p class="sub">Every tip to Brian’s address, whether it comes from the jar, the trash can, or a vote, gets a public thank-you here. Use a nickname if you like, or stay anonymous. Tips are checked by hand against public on-chain data (Lightning tippers can share a nickname with Brian on Nostr).</p>
-    <p class="muted">Tips only. Burns are listed separately on the Burn wall.</p>
-    <p class="muted"><b>The wall is empty: 0 tips so far.</b> The first tipper gets the 🥇 <b>First Tipper</b> badge here for good.</p>
-  </div>
-
-  <div class="card" id="goal">
-    <h1>Goal: one year of hosting and data</h1>
-    <p class="sub">One concrete goal: 21,000 sats toward keeping this page, the scoreboard, and the bots’ market-data access online for a year.</p>
-    <div class="goal"><div class="goal-meta"><span>Progress</span><span>0 / 21,000 sats</span></div><div class="bar"><span style="width:0%"></span></div></div>
-    <p class="muted">Updated by hand from <a style="color:#f7931a" href="https://mempool.space/address/bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv">public on-chain data</a>. Lightning tips get added when they arrive. Last checked Mon Oct 19, 2026.</p>
-  </div>
-
-  <div class="card" id="this-week">
-    <h1>This week</h1>
-    <p class="muted">Refreshed every Sunday. Week of Oct 19, 2026:</p>
-    <ul class="muted">
-      <li>Closed week 1’s vote (0 votes, no change) and opened week 2 (closes Mon Oct 26, 9:00 PM ET).</li>
-      <li>Added the thank-you wall, goal meter, trash can, burn wall, share button, and FAQ.</li>
-      <li>Daily themes: Lazy Sunday, then Motivation Monday.</li>
-      <li>Tips received: <b>0</b> (0 sats).</li>
-    </ul>
-  </div>
-
-  <div class="card" id="share">
-    <h1>Share the jar</h1>
-    <p class="sub">The most helpful free thing you can do is send this page to one person who’d enjoy it.</p>
-    <code id="page-link">https://butlerwake-alt.github.io/tip-jar/</code>
-    <div class="actions"><button class="btn alt copy-btn" type="button" data-target="page-link" data-label="Copy link">Copy link</button> <button class="btn" type="button" id="share-btn">Share…</button></div>
-  </div>
-
-  <div class="card" id="faq">
-    <h1>Quick FAQ</h1>
-    <details><summary>Lightning or on-chain?</summary><p class="muted">Lightning is fast with tiny fees, so it’s best for small tips, but it’s private and can’t vote. On-chain is public and can cast a vote, but network fees make it better for larger tips.</p></details>
-    <details><summary>How do I know the address is right?</summary><p class="muted">The tip address starts with <b>bc1qtxjp</b> and ends with <b>r4nv</b>. Check both ends before you send.</p></details>
-    <details><summary>Is the trash can a burn?</summary><p class="muted">No. The trash can is a tip to Brian. Only the Burn wall’s red address destroys sats.</p></details>
+    <h2>🙏 Call-out wall</h2>
+    <p class="sub">Every tip to Brian’s address gets a public thank-you here. A nickname is optional. Tips only, no burns.</p>
+    <p class="m"><b>Empty so far: 0 tips.</b> The first tipper gets a permanent 🥇 First Tipper badge.</p>
   </div>
 
   <div class="card burn" id="burn-wall">
-    <span class="tag" style="background:#ff3b3b;color:#fff">🔥 BURN, NOT A TIP</span>
-    <h1>Burn wall</h1>
-    <div class="warn">⚠️ Burned sats are gone forever. Brian gets none of them. This is not a tip. Nobody can refund or recover them.</div>
-    <p class="sub" style="margin-top:14px">For people who want to destroy BTC in public for a call-out. This uses the well-known, widely documented burn address <b>1BitcoinEaterAddressDontSendf59kuE</b>. Its checksum is valid, so wallets accept it. Nobody is known to hold its key and nothing has ever been spent from it, so in practice it’s unspendable. That can’t be mathematically proven.</p>
-    <img class="qr" src="burn_qr.png" alt="RED BURN QR: 1BitcoinEaterAddressDontSendf59kuE, destroys sats, not a tip"/>
-    <p style="text-align:center;color:#ff6b6b;font-weight:700;margin:0">RED QR = BURN ADDRESS (not the tip jar)</p>
-    <code id="burn-addr">1BitcoinEaterAddressDontSendf59kuE</code>
-    <p class="muted">To claim a call-out, post your txid (on Nostr, replying to Brian’s Paper Lab). Each one is checked by hand against the public chain before it goes up.</p>
-    <p class="muted">Burn call-outs are listed only here, never on the Thank-you wall, since a burn isn’t a tip.</p>
-    <p class="muted"><b>The wall is empty. No burns claimed yet.</b></p>
+    <h2>🔥 Burn wall (NOT a tip)</h2>
+    <div class="warn">Burned sats are destroyed forever. Brian gets none of them. Not a tip.</div>
+    <img class="qr" src="burn_qr.png" alt="RED BURN QR: 1BitcoinEaterAddressDontSendf59kuE, destroys sats"/>
+    <code>1BitcoinEaterAddressDontSendf59kuE</code>
+    <p class="m">This is a widely documented burn address. Its checksum is valid, nobody is known to hold its key, and nothing has ever been spent from it, so it’s unspendable in practice. Post your txid to claim a call-out. Each one is hand-checked on-chain. <b>No burns yet.</b></p>
   </div>
 
-  <div class="card">
-    <h2 style="margin-top:0">Fine print</h2>
-    <p class="fine" style="margin-top:0">Paper trading only: the bots trade simulated money, and no real money is traded. Nothing here is investment advice, and no returns are promised or implied. Past paper results say nothing about the future. Tips are optional gifts. They buy nothing, carry no refund, and don’t give anyone a stake in anything. Votes pick one paper-settings change per week, and that’s all they do. Bitcoin payments are public and permanent, so anyone can see this address’s history.</p>
-  </div>
-  <p class="fine" style="text-align:center">Follow weekly tallies on Nostr: <a style="color:#f7931a" href="https://njump.me/npub1wxxk2mtp0mrmj5ev3z9a840ewq4rtznw8h65ypwnx0z0unvte4cs8zpmu0">Brian’s Paper Lab</a> · <code style="font-size:0.8em;word-break:break-all">npub1wxxk2mtp0mrmj5ev3z9a840ewq4rtznw8h65ypwnx0z0unvte4cs8zpmu0</code></p>
+  <p class="m" style="max-width:440px;text-align:center">Paper trading only, and no real money is traded. Not investment advice. Tips are optional gifts and buy nothing. <a href="https://njump.me/npub1wxxk2mtp0mrmj5ev3z9a840ewq4rtznw8h65ypwnx0z0unvte4cs8zpmu0">Nostr</a> · <a href="#" id="toggle-log">This week</a></p>
+  <p class="m" id="log" hidden style="max-width:440px">Week of Oct 19 (refreshed Sundays): simplified the page, added the call-out wall and burn wall, and opened the week 2 vote. Tips: 0.</p>
 <script>
-  document.querySelectorAll('.copy-btn').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var b = this, a = document.getElementById(b.dataset.target).textContent.trim();
-      function done(ok) { b.textContent = ok ? 'Copied!' : 'Copy failed — select the address'; setTimeout(function(){ b.textContent = b.dataset.label || 'Copy address'; }, 2000); }
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(a).then(function(){ done(true); }, function(){ done(false); });
-      } else {
-        var r = document.createRange(); r.selectNodeContents(document.getElementById(b.dataset.target));
-        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        try { done(document.execCommand('copy')); } catch (e) { done(false); }
-      }
-    });
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.onclick = function () {
+      var t = document.getElementById(b.dataset.target).textContent.trim();
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ b.textContent='Copied!'; }, function(){ b.textContent='Select it manually'; });
+      setTimeout(function(){ b.textContent=b.dataset.label; }, 2000);
+    };
   });
-  document.getElementById('share-btn').addEventListener('click', function () {
-    var u = 'https://butlerwake-alt.github.io/tip-jar/';
-    if (navigator.share) navigator.share({title: 'Paper Lab Tip Jar', url: u}).catch(function(){});
-    else window.open('https://x.com/intent/post?url=' + encodeURIComponent(u), '_blank');
-  });
-  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-  function getJSON(u) { return fetch(u + '?t=' + Date.now(), {cache:'no-store'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
-  getJSON('week.json').then(function (w) {
-    document.getElementById('wk-question').textContent = w.question;
-    document.getElementById('wk-num').textContent = w.week;
-    document.getElementById('wk-deadline').textContent = w.deadline_label;
-    if (w.change) document.getElementById('wk-change').textContent = w.change;
-  }).catch(function () {});
-  getJSON('votes.json').then(function (v) {
-    var cb = v.tally.coinbase_dual.votes, kr = v.tally.kraken.votes, tot = cb + kr;
-    document.getElementById('v-cb').textContent = cb;
-    document.getElementById('v-kr').textContent = kr;
-    document.getElementById('b-cb').style.width = tot ? (100 * cb / tot) + '%' : '0';
-    document.getElementById('b-kr').style.width = tot ? (100 * kr / tot) + '%' : '0';
-    var meta = tot ? (tot + ' vote' + (tot === 1 ? '' : 's') + ' so far') : 'No votes yet. Yours could be the first.';
-    if (v.tally.none.votes) meta += ' · ' + v.tally.none.votes + ' tip(s) without a vote';
-    if (v.pending_unconfirmed && v.pending_unconfirmed.length) meta += ' · ' + v.pending_unconfirmed.length + ' unconfirmed (counted once confirmed)';
-    meta += ' · Updated ' + v.updated;
-    document.getElementById('v-meta').textContent = meta;
-    var ul = document.getElementById('v-list');
-    (v.votes || []).forEach(function (e) {
-      var li = document.createElement('li');
-      li.innerHTML = esc(e.time) + ': ' + Number(e.sats).toLocaleString() + ' sats → ' +
-        (e.vote === 'coinbase_dual' ? 'Coinbase dual' : e.vote === 'kraken' ? 'Kraken' : 'no vote') +
-        ' (<a style="color:#f7931a" href="https://mempool.space/tx/' + esc(e.txid) + '">' + esc(e.txid.slice(0, 10)) + '…</a>)';
-      ul.appendChild(li);
-    });
-  }).catch(function () { document.getElementById('v-meta').textContent = 'Vote count unavailable right now. Check mempool.space directly.'; });
-  getJSON('scoreboard.json').then(function (d) {
-    var b = {}; d.bots.forEach(function (x) { b[x.key] = x; });
-    var c = b.coinbase_dual || {}, k = b.kraken || {};
-    function f(v, kind) {
-      if (v === undefined || v === null || v === 'n/a') return 'n/a';
-      if (kind === 'usd') { var cls = v < 0 ? 'neg' : v > 0 ? 'pos' : ''; return '<span class="' + cls + '">' + (v < 0 ? '-$' : '$') + Math.abs(v).toFixed(2) + '</span>'; }
-      if (kind === 'pct') return v + '%';
-      return esc(v);
-    }
-    var rows = [['Closed trades','closed_trades'],['Wins','wins'],['Losses','losses'],['Win rate','win_rate_pct','pct'],
-                ['Total paper P&amp;L','total_pnl_usd','usd'],['Best trade','best_trade_usd','usd'],['Worst trade','worst_trade_usd','usd'],
-                ['Simulated fees','total_fees_usd','usd'],['Last trade','last_trade_time']];
-    document.getElementById('sb-body').innerHTML = rows.map(function (r) {
-      return '<tr><td>' + r[0] + '</td><td>' + f(c[r[1]], r[2]) + '</td><td>' + f(k[r[1]], r[2]) + '</td></tr>';
-    }).join('');
-    document.getElementById('sb-meta').textContent = 'Updated ' + d.updated + '. Coinbase dual P&L: ' + (c.pnl_basis || 'n/a') + ' Kraken P&L: ' + (k.pnl_basis || 'n/a') +
-      ' Both bots are paused right now, so the numbers reflect their last logged trades. Paper money only.';
-  }).catch(function () { document.getElementById('sb-body').innerHTML = '<tr><td colspan="3">Scoreboard unavailable right now.</td></tr>'; });
+  document.getElementById('share').onclick = function () {
+    var u='https://butlerwake-alt.github.io/tip-jar/';
+    if (navigator.share) navigator.share({title:'Paper Lab Tip Jar', url:u}).catch(function(){});
+    else window.open('https://x.com/intent/post?url='+encodeURIComponent(u),'_blank');
+  };
+  document.getElementById('toggle-log').onclick = function (e) { e.preventDefault(); var l=document.getElementById('log'); l.hidden=!l.hidden; };
 </script>
 </body>
 </html>
