@@ -3,80 +3,29 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Midweek Lab Notes — Paper Lab Tip Jar</title>
-<meta name="description" content="Brian's tip jar for his open paper-trading lab. Optional BTC tips, nothing for sale, no guarantees."/>
-<meta property="og:title" content="Tiny Tip Tuesday — Paper Lab Tip Jar"/>
-<meta property="og:description" content="Optional BTC tips for Brian's open paper-trading lab. Nothing for sale, no guarantees."/>
+<title>Dump here</title>
+<meta property="og:title" content="Dump here"/>
 <meta property="og:url" content="https://butlerwake-alt.github.io/tip-jar/"/>
-<meta name="twitter:card" content="summary"/>
 <style>
-  :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-  body { margin:0; background:#0b1020; color:#e8eefc; padding:16px; display:flex; flex-direction:column; align-items:center; gap:14px; }
-  .card { max-width:440px; width:100%; box-sizing:border-box; background:#121a33; border:1px solid #2a3a66; border-radius:16px; padding:20px; }
-  h1 { margin:0 0 4px; font-size:1.3rem; } h2 { margin:0 0 8px; font-size:1.05rem; }
-  .sub { color:#9db0d8; margin:0; line-height:1.4; }
-  .qr { display:block; margin:14px auto; width:200px; height:200px; background:#fff; border-radius:10px; padding:8px; box-sizing:border-box; image-rendering:pixelated; }
-  code { display:block; word-break:break-all; background:#0b1020; padding:10px; border-radius:8px; font-size:.8rem; margin:8px 0; }
-  .btn { display:inline-block; background:#f7931a; color:#111; font-weight:700; text-decoration:none; padding:10px 14px; border-radius:999px; border:0; font:inherit; font-weight:700; cursor:pointer; }
-  .alt { background:#2a3a66; color:#e8eefc; }
-  .row { display:flex; flex-wrap:wrap; gap:8px; }
-  .m { color:#9db0d8; font-size:.85rem; line-height:1.4; margin:8px 0 0; }
-  a { color:#f7931a; }
-  .burn { border:3px dashed #ff3b3b; background:#2a0d10; } .burn h2 { color:#ff6b6b; }
-  .burn .qr { width:140px; height:140px; border:5px solid #ff3b3b; }
-  .warn { background:#ff3b3b; color:#fff; font-weight:700; padding:10px; border-radius:10px; font-size:.9rem; }
+  body { margin:0; min-height:100vh; background:#0b1020; color:#e8eefc; font-family:system-ui,sans-serif;
+         display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:20px; box-sizing:border-box; text-align:center; }
+  h1 { margin:0; font-size:clamp(2.5rem,12vw,5rem); }
+  img { width:min(85vw,420px); height:auto; background:#fff; padding:12px; border-radius:14px; box-sizing:border-box; image-rendering:pixelated; }
+  code { font-size:.8rem; color:#9db0d8; word-break:break-all; max-width:420px; }
+  button { background:#2a3a66; color:#e8eefc; border:0; border-radius:999px; padding:8px 16px; font:inherit; cursor:pointer; }
 </style>
 </head>
 <body>
-  <div class="card" id="tip">
-    <!-- DAILY THEME: routine updates the h1 + .sub below (and <title>) -->
-    <h1 id="theme-title">Midweek Lab Notes — The Paper Bots Keep Running</h1>
-    <p class="sub" id="theme-line">Halfway through the week, the lab is still trading on paper money only. A tip of any size helps keep it online.</p>
-
-    <img class="qr" src="btc_tip_qr.png" alt="Tip QR for Brian: bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
-    <p style="text-align:center;margin:0"><b>🗑️ Toss your sats in — Brian needs them.</b></p>
-    <p class="m" style="text-align:center;margin-top:4px">This is a tip, and it goes straight to Brian’s own wallet.</p>
-    <code id="btc-addr">bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
-    <div class="row">
-      <a class="btn" href="bitcoin:bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv?label=Brian%20Paper%20Lab&message=Optional%20tip%20for%20the%20paper%20trading%20lab">Open wallet</a>
-      <button class="btn alt copy" data-target="btc-addr" data-label="Copy address">Copy address</button>
-      <button class="btn alt" id="share">Share page</button>
-    </div>
-    <p class="m">⚡ Small tip? Lightning: <b>butlerwake@strike.me</b> (<a href="https://strike.me/butlerwake">Strike</a>)</p>
-    <p class="m">Goal: 0 / 21,000 sats for a year of hosting and market data. Updated by hand from <a href="https://mempool.space/address/bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv">public on-chain data</a>.</p>
-    <p class="m">Week 2 vote: an on-chain tip ending in 1 (Coinbase dual) or 2 (Kraken) picks which paper bot sits out weekends. Closes Mon Oct 26, 9:00 PM ET. Week 1 closed with 0 votes, so nothing changed.</p>
-  </div>
-
-  <div class="card" id="thanks">
-    <h2>🙏 Call-out wall</h2>
-    <p class="sub">Every tip to Brian’s address gets a public thank-you here. A nickname is optional. Tips only, no burns.</p>
-    <p class="m"><b>Empty so far: 0 tips.</b> The first tipper gets a permanent 🥇 First Tipper badge.</p>
-  </div>
-
-  <div class="card burn" id="burn-wall">
-    <h2>🔥 Burn wall (NOT a tip)</h2>
-    <div class="warn">Burned sats are destroyed forever. Brian gets none of them. Not a tip.</div>
-    <img class="qr" src="burn_qr.png" alt="RED BURN QR: 1BitcoinEaterAddressDontSendf59kuE, destroys sats"/>
-    <code>1BitcoinEaterAddressDontSendf59kuE</code>
-    <p class="m">This is a widely documented burn address. Its checksum is valid, nobody is known to hold its key, and nothing has ever been spent from it, so it’s unspendable in practice. Post your txid to claim a call-out. Each one is hand-checked on-chain. <b>No burns yet.</b></p>
-  </div>
-
-  <p class="m" style="max-width:440px;text-align:center">Paper trading only, and no real money is traded. Not investment advice. Tips are optional gifts and buy nothing. <a href="https://njump.me/npub1wxxk2mtp0mrmj5ev3z9a840ewq4rtznw8h65ypwnx0z0unvte4cs8zpmu0">Nostr</a> · <a href="#" id="toggle-log">This week</a></p>
-  <p class="m" id="log" hidden style="max-width:440px">Week of Oct 19 (refreshed Sundays): simplified the page, added the call-out wall and burn wall, and opened the week 2 vote. Tips: 0.</p>
+  <h1>Dump here</h1>
+  <img src="btc_tip_qr.png" alt="Bitcoin QR for bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
+  <code id="a">bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
+  <button id="c">Copy address</button>
 <script>
-  document.querySelectorAll('.copy').forEach(function (b) {
-    b.onclick = function () {
-      var t = document.getElementById(b.dataset.target).textContent.trim();
-      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ b.textContent='Copied!'; }, function(){ b.textContent='Select it manually'; });
-      setTimeout(function(){ b.textContent=b.dataset.label; }, 2000);
-    };
-  });
-  document.getElementById('share').onclick = function () {
-    var u='https://butlerwake-alt.github.io/tip-jar/';
-    if (navigator.share) navigator.share({title:'Paper Lab Tip Jar', url:u}).catch(function(){});
-    else window.open('https://x.com/intent/post?url='+encodeURIComponent(u),'_blank');
+  document.getElementById('c').onclick = function () {
+    var b = this, t = document.getElementById('a').textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ b.textContent='Copied!'; }, function(){ b.textContent='Select it manually'; });
+    setTimeout(function(){ b.textContent='Copy address'; }, 2000);
   };
-  document.getElementById('toggle-log').onclick = function (e) { e.preventDefault(); var l=document.getElementById('log'); l.hidden=!l.hidden; };
 </script>
 </body>
 </html>
