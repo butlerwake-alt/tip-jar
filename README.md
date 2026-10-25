@@ -1,22 +1,12 @@
-# Tip jar (optional)
+# Dump here — Bitcoin tip jar
 
-If this paper-trading work helped you and you want to send Bitcoin:
+**👉 https://butlerwake-alt.github.io/tip-jar/**
 
-**Lightning (best for small tips):** `butlerwake@strike.me`
+A minimal Bitcoin tip jar: one QR code, one address. Tips are optional. Nothing is for sale, it's not an investment, and there are no guarantees.
 
-**On-chain BTC (larger tips):** `bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv`
+**On-chain BTC:** `bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv` (native SegWit)
+**Lightning:** `butlerwake@strike.me`
 
-Network: Bitcoin (BTC), native SegWit (bc1q…).
-Optional only — nothing for sale, not an investment, no guarantees, no support contract.
+Check the address before sending: it starts with `bc1qtxjp` and ends with `r4nv`.
 
-Live page: index.html (QRs: lightning_qr.png and btc_tip_qr.png; the BTC QR is a BIP21 URI with label/message).
-
-## Tips steer the bots
-
-On-chain tips can vote on one paper-bot change per week: the last digit of the tip in sats is the vote (1 = Coinbase dual, 2 = Kraken, anything else = tip, no vote). One confirmed tip = one vote. Lightning tips can't vote, because Strike payments aren't public.
-
-- `week.json`: this week's question and deadline
-- `votes.json`: tally built from the public chain (mempool.space) by `tools/count_votes.py`
-- `scoreboard.json`: built from the bots' own trade logs by `tools/build_scoreboard.py`
-
-Paper trading only. No real money traded, not investment advice, no promised returns.
+The repo also keeps older data files (`week.json`, `votes.json`, `scoreboard.json`) from a retired paper-trading bot vote.
