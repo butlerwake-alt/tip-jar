@@ -25,6 +25,7 @@
   img { width:min(85vw,420px); height:auto; background:#fff; padding:12px; border-radius:14px; box-sizing:border-box; image-rendering:pixelated; }
   code { font-size:.8rem; color:#9db0d8; word-break:break-all; max-width:420px; }
   button { background:#2a3a66; color:#e8eefc; border:0; border-radius:999px; padding:8px 16px; font:inherit; cursor:pointer; }
+  .s { margin:0; font-size:.85rem; color:#9db0d8; } .s a { color:#f7c948; }
 </style>
 </head>
 <body>
@@ -32,6 +33,8 @@
   <img src="btc_tip_qr.png" alt="Bitcoin QR for bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv"/>
   <code id="a">bc1qtxjpah5ntpq6fk92yukysc32zjewlz9q0sr4nv</code>
   <button id="c">Copy address</button>
+  <p class="s">⚡ or zap <a href="lightning:butlerwake@strike.me">butlerwake@strike.me</a></p>
+  <p class="s">First tipper gets drawn into the next Ducks &amp; Sats piece 🦆</p>
 <script>
   document.getElementById('c').onclick = function () {
     var b = this, t = document.getElementById('a').textContent;
